@@ -1,0 +1,22 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "allowJs": false,
+        "listFiles": true,
+        "sourceMap": true,
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "lib": [
+            "dom",
+            "es7"
+        ]
+    },
+    "include": [
+        "./**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
