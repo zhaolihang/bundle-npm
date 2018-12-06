@@ -33,15 +33,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+// node index.js --input upng-js --file b.js --format umd --name test --mini
 var rollup = require('rollup');
 var resolve = require('rollup-plugin-node-resolve');
 var commonjs = require('rollup-plugin-commonjs');
 var uglify = require('rollup-plugin-uglify').uglify;
 var argv = require('yargs').argv;
-//args: input file format name mini
+var relative = require('require-relative');
+/**
+ * args: input file format name mini
+ */
 var input = argv.input;
-input = require.resolve(input);
-var miniify = argv.mini;
+input = relative.resolve(input, process.cwd());
+var mini = argv.mini;
 var file = argv.file;
 var format = argv.format;
 var modeleName = argv.name;
@@ -49,7 +53,7 @@ var plugins = [
     resolve(),
     commonjs()
 ];
-if (miniify) {
+if (mini) {
     plugins.push(uglify());
 }
 var inputOptions = { input: input, plugins: plugins };
@@ -74,6 +78,7 @@ function build() {
                 case 4:
                     error_1 = _b.sent();
                     console.error(error_1.message);
+                    console.error(error_1.stack);
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
             }

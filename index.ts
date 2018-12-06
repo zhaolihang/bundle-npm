@@ -1,25 +1,32 @@
-// node index.js --input upng-js --file b.js --format umd --name test --mini
+// npm i -g bundle-npm & cd workspace
+// input(must) file(must) format(must) name(must) mini(option)
+// bundle-npm --input upng-js --file bundle.js --format umd --name UPNG --mini  # bundle a npm module 'upng-js'
+// bundle-npm --input ./index.js --file bundle.js --format umd --name UPNG --mini  # bundle by entry file './index.js'
+// so 'bundle-npm --input index.js' != 'bundle-npm --input ./index.js'
 
 const rollup = require('rollup');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const uglify = require('rollup-plugin-uglify').uglify;
 const argv = require('yargs').argv;
+const relative = require('require-relative');
 
-//args: input file format name mini
+/**
+ * args: input file format name mini
+ */
 
-let input = argv.input;
-input = require.resolve(input);
-let miniify = argv.mini;
-let file = argv.file;
-let format = argv.format;
-let modeleName = argv.name;
+let input = argv.input;// must
+input = relative.resolve(input, process.cwd());
+let file = argv.file;// must
+let format = argv.format;// must
+let modeleName = argv.name;// must
+let mini = argv.mini;// option
 
 let plugins = [
     resolve(),
     commonjs()
 ];
-if (miniify) {
+if (mini) {
     plugins.push(uglify());
 }
 
@@ -36,6 +43,7 @@ async function build() {
         await bundle.write(outputOptions);// or write the bundle to disk
     } catch (error) {
         console.error((error as Error).message);
+        console.error((error as Error).stack);
     }
 }
 
