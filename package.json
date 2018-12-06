@@ -7,8 +7,6 @@
   "bin": {
     "bundle-npm": "./bin/bundle-npm"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "require-relative": "^0.8.7",
     "rollup": "^0.67.4",
@@ -16,5 +14,12 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-uglify": "^6.0.0",
     "yargs": "^12.0.5"
+  },
+  "license": "ISC",
+  "author": "625335512@qq.com",
+  "homepage": "https://github.com/zhaolihang/bundle-npm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaolihang/bundle-npm.git"
   }
 }
